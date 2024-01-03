@@ -1,16 +1,11 @@
 <script setup>
-// import { useLoginStore } from "../stores/LogStore";
 import { onMounted } from "vue";
-import Cookies from "universal-cookie";
-import { useLoginStore } from "../stores/loginStore";
 
 definePageMeta({
   layout: "log",
 });
 
 //variables
-let cookie = new Cookies();
-let { changeToken } = useLoginStore();
 
 let isLoading = ref(false);
 let view = ref(false);
@@ -66,11 +61,8 @@ async function submitForm(e) {
       });
 
       if (res.value.msg === "login") {
-        await cookie.set("user", res.value.token);
-        await cookie.set("userInfo", res.value.data);
+        useCookie("user").value = res.value.token;
         navigateTo("/");
-        changeToken(res.value.token);
-        console.log(res.value.data)
       } else if (res.value.msg === "The email not exist") {
         errorMessage.value = "The email not exist";
         isLoading.value = false;

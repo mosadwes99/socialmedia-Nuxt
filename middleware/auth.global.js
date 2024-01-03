@@ -1,4 +1,3 @@
-import Cookies from "universal-cookie";
 
 export default defineNuxtRouteMiddleware((to, from, next) => {
   let token = useCookie("user").value;

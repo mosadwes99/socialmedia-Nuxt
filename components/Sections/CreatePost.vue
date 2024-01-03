@@ -1,12 +1,10 @@
 <script setup>
-import Cookies from "universal-cookie";
 import { storeToRefs } from "pinia";
 import { useDataStore } from "../stores/userDataStore";
 
 let store = useDataStore();
 let { userData } = storeToRefs(store);
-let cookie = new Cookies();
-let token = cookie.get("user");
+let token = useCookie("user").value;
 let route = useRoute();
 let emit = defineEmits(["update"]);
 

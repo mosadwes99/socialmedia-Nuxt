@@ -1,5 +1,4 @@
 <script setup>
-import Cookies from "universal-cookie";
 import { storeToRefs } from "pinia";
 import { useDataStore } from "../stores/userDataStore";
 
@@ -9,9 +8,7 @@ let { userData } = storeToRefs(store);
 let { data, statue } = defineProps(["data", "statue"]);
 let emit = defineEmits(["update"]);
 
-let cookie = new Cookies();
-
-let token = cookie.get("user");
+let token = useCookie("user").value;
 let isLoading = ref(false);
 
 async function changeUserImg(e) {
@@ -77,8 +74,7 @@ async function cancelRequest() {
     console.log(res.value);
     emit("update");
     await getUserData();
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 async function acceptRequest() {
   try {
@@ -93,8 +89,7 @@ async function acceptRequest() {
     console.log(res.value);
     emit("update");
     await getUserData();
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 async function cancelFriend() {
   try {
@@ -109,8 +104,7 @@ async function cancelFriend() {
     console.log(res.value);
     emit("update");
     await getUserData();
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 
 let friendButton = computed(() => {

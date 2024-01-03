@@ -2,14 +2,12 @@
 import { storeToRefs } from "pinia";
 import { useDataStore } from "../stores/userDataStore";
 import { onClickOutside } from "@vueuse/core";
-import Cookies from "universal-cookie";
 
 let store = useDataStore();
 let { getDataEmpty } = store;
 let { userData } = storeToRefs(store);
 
 let token = useCookie("user").value;
-let Cookie = new Cookies();
 let query = ref("");
 let data = ref([]);
 let emptyData = ref("");
@@ -64,10 +62,14 @@ onClickOutside(target, () => {
 
 <template>
   <div
-    class="bg-white shadow-sm shadow-slate-200 border-b-2 border-slate-200 z-10 sticky top-0 "
+    class="bg-white shadow-sm shadow-slate-200 border-b-2 border-slate-200 z-10 sticky top-0"
   >
-    <div class="px-5 py-3 lg:py-0  w-4/5 mx-auto  justify-center lg:justify-between flex">
-      <div class="w-full lg:w-1/2 flex justify-center lg:justify-start  items-center px-2">
+    <div
+      class="px-5 py-3 lg:py-0 w-4/5 mx-auto justify-center lg:justify-between flex"
+    >
+      <div
+        class="w-full lg:w-1/2 flex justify-center lg:justify-start items-center px-2"
+      >
         <img src="../assets/img/logo.png" class="lg:w-12 w-8" />
         <p class="lg:text-xl flex items-center">
           <span class="font-semibold lg:text-3xl text-pramiary">C</span>ontainar

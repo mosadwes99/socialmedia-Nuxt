@@ -1,11 +1,8 @@
 <script setup>
-import Cookies from "universal-cookie";
-
 let { data } = defineProps(["data"]);
 let emit = defineEmits(["close", "update"]);
-let cookie = new Cookies();
 
-let token = cookie.get("user");
+let token = useCookie("user").value;
 let abstract = reactive({
   job: "",
   education: "",
