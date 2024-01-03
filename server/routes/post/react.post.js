@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     let { id, react } = await readBody(event);
     let { token } = event.req.headers;
     let runtimeConfig = useRuntimeConfig();
-    console.log(react)
+    console.log(react);
 
     function verifyToken() {
       return new Promise((resolve, reject) => {
@@ -32,13 +32,24 @@ export default defineEventHandler(async (event) => {
       return { msg: "react removed successfully", reacts };
     } else {
       reacts = post.reacts;
-      reacts = [
-        ...reacts,
-        {
-          reactBy: decoded.userId,
-          react: react,
-        },
-      ];
+      if (reacts.some((react) => react.reactBy == decoded.userId)) {
+        reacts = reacts.filter((item) => item.reactBy != decoded.userId);
+        reacts = [
+          ...reacts,
+          {
+            reactBy: decoded.userId,
+            react: react,
+          },
+        ];
+      } else {
+        reacts = [
+          ...reacts,
+          {
+            reactBy: decoded.userId,
+            react: react,
+          },
+        ];
+      }
       await postModel.findByIdAndUpdate(id, { reacts: reacts });
       return { msg: "react added successfully", reacts };
     }

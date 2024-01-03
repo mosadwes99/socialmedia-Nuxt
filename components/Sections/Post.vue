@@ -107,17 +107,20 @@ async function getReact(e) {
   try {
     let reacts = [];
     let react = "";
+
+    if (!e) {
+      react = "like";
+    } else {
+      react = e;
+    }
     reacts = post.reacts;
     if (reacts.some((item) => item.reactBy == userData.value.id)) {
       if (
-        reacts.filter((item) => item.reactBy == userData.value.id)[0].react == e
+        reacts.filter((item) => item.reactBy == userData.value.id)[0].react ==
+        react
       ) {
         react = "none";
-      } else {
-        react = e;
       }
-    } else {
-      react = e;
     }
     let { data: res } = await useFetch(`http://localhost:3000/post/react`, {
       transform: (_res) => _res,
@@ -132,6 +135,8 @@ async function getReact(e) {
   } catch (e) {
     console.log(e);
   }
+
+  console.log("momo");
 }
 
 function getIsReact() {
@@ -172,8 +177,6 @@ async function getComment() {
     console.log(err);
   }
 }
-
-
 </script>
 
 <template>
@@ -181,7 +184,7 @@ async function getComment() {
     <div class="flex items-center w-full justify-between relative">
       <div class="flex items-center">
         <img
-        @click="navigateTo(`/profile/${post.createdBy._id}`)"
+          @click="navigateTo(`/profile/${post.createdBy._id}`)"
           :src="'/users/' + post.createdBy.userImage"
           alt=""
           class="w-12 h-12 rounded-full me-2 cursor-pointer"
@@ -247,7 +250,7 @@ async function getComment() {
         v-if="isReact"
         class="flex items-center gap-2 cursor-pointer group relative"
         :class="shownReact.color"
-        @click="(event) => getReact('like')"
+        @click="getReact()"
       >
         <Icon :name="shownReact.icon" class="text-xl transition" />
 
@@ -259,7 +262,7 @@ async function getComment() {
       <div
         v-else
         class="flex items-center gap-2 cursor-pointer group relative"
-        @click="(event) => getReact('like')"
+        @click="getReact('')"
       >
         <Icon
           name="ph:thumbs-up-duotone"
