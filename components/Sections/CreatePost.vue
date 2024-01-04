@@ -87,7 +87,7 @@ async function sendPost() {
     try {
       let formData = new FormData();
       post.img.map((item) => formData.append("imgPost", item));
-      let { data: res } = await useFetch("http://localhost:3000/post", {
+      let { data: res } = await useFetch(`/post`, {
         method: "POST",
         headers: { title: post.title, token },
         transform: (_res) => _res,

@@ -54,11 +54,14 @@ async function submitForm(e) {
   if (dataError.email == "" && dataError.password == "") {
     isLoading.value = true;
     try {
-      let { data: res } = await useFetch("http://localhost:3000/login", {
-        transform: (_res) => _res,
-        method: "POST",
-        body: getData,
-      });
+      let { data: res } = await useFetch(
+        `/login`,
+        {
+          transform: (_res) => _res,
+          method: "POST",
+          body: getData,
+        }
+      );
 
       if (res.value.msg === "login") {
         useCookie("user").value = res.value.token;

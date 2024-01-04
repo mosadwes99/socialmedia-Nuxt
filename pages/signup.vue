@@ -84,7 +84,7 @@ async function submitForm(e) {
   ) {
     isLoading.value = true;
     try {
-      let { data: res } = await useFetch("http://localhost:3000/signup", {
+      let { data: res } = await useFetch(`/signup`, {
         transform: (_res) => _res.msg,
         method: "POST",
         body: {

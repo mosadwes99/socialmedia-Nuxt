@@ -70,14 +70,11 @@ function getSwiperImgs(e, i) {
 
 async function deletePost() {
   try {
-    let { data: res } = await useFetch(
-      `http://localhost:3000/post/${thisId.value}`,
-      {
-        transform: (_res) => _res,
-        method: "DELETE",
-        headers: { token: token },
-      }
-    );
+    let { data: res } = await useFetch(`/post/${thisId.value}`, {
+      transform: (_res) => _res,
+      method: "DELETE",
+      headers: { token: token },
+    });
     console.log(res.value.msg);
     emit("update");
   } catch (err) {
@@ -122,7 +119,7 @@ async function getReact(e) {
         react = "none";
       }
     }
-    let { data: res } = await useFetch(`http://localhost:3000/post/react`, {
+    let { data: res } = await useFetch(`/post/react`, {
       transform: (_res) => _res,
       method: "POST",
       headers: { token: token },
@@ -163,7 +160,7 @@ let shownReact = computed(() => {
 
 async function getComment() {
   try {
-    let { data: res } = await useFetch(`http://localhost:3000/post/comment`, {
+    let { data: res } = await useFetch(`/post/comment`, {
       transform: (_res) => _res,
       method: "POST",
       headers: { token: token },

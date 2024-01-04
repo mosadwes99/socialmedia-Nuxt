@@ -17,15 +17,12 @@ async function changeUserImg(e) {
     try {
       let formData = new FormData();
       formData.append("userImg", e.target.files[0]);
-      let { data: res } = await useFetch(
-        "http://localhost:3000/user/changeimg",
-        {
-          method: "PUT",
-          headers: { token },
-          body: formData,
-          transform: (_res) => _res,
-        }
-      );
+      let { data: res } = await useFetch(`/user/changeimg`, {
+        method: "PUT",
+        headers: { token },
+        body: formData,
+        transform: (_res) => _res,
+      });
       if (res.value.msg == "Image Changed successfully") {
         emit("update");
         await getUserData();
@@ -46,14 +43,11 @@ async function changeUserImg(e) {
 
 async function sendRequest() {
   try {
-    let { data: res } = await useFetch(
-      `http://localhost:3000/user/request/${data.id}`,
-      {
-        method: "PUT",
-        headers: { token },
-        transform: (_res) => _res,
-      }
-    );
+    let { data: res } = await useFetch(`/user/request/${data.id}`, {
+      method: "PUT",
+      headers: { token },
+      transform: (_res) => _res,
+    });
     console.log(res.value);
     emit("update");
     await getUserData();
@@ -63,14 +57,11 @@ async function sendRequest() {
 }
 async function cancelRequest() {
   try {
-    let { data: res } = await useFetch(
-      `http://localhost:3000/user/request/${data.id}`,
-      {
-        method: "DELETE",
-        headers: { token },
-        transform: (_res) => _res,
-      }
-    );
+    let { data: res } = await useFetch(`/user/request/${data.id}`, {
+      method: "DELETE",
+      headers: { token },
+      transform: (_res) => _res,
+    });
     console.log(res.value);
     emit("update");
     await getUserData();
@@ -78,14 +69,11 @@ async function cancelRequest() {
 }
 async function acceptRequest() {
   try {
-    let { data: res } = await useFetch(
-      `http://localhost:3000/user/add/${data.id}`,
-      {
-        method: "PUT",
-        headers: { token },
-        transform: (_res) => _res,
-      }
-    );
+    let { data: res } = await useFetch(`/user/add/${data.id}`, {
+      method: "PUT",
+      headers: { token },
+      transform: (_res) => _res,
+    });
     console.log(res.value);
     emit("update");
     await getUserData();
@@ -93,14 +81,11 @@ async function acceptRequest() {
 }
 async function cancelFriend() {
   try {
-    let { data: res } = await useFetch(
-      `http://localhost:3000/user/add/${data.id}`,
-      {
-        method: "DELETE",
-        headers: { token },
-        transform: (_res) => _res,
-      }
-    );
+    let { data: res } = await useFetch(`/user/add/${data.id}`, {
+      method: "DELETE",
+      headers: { token },
+      transform: (_res) => _res,
+    });
     console.log(res.value);
     emit("update");
     await getUserData();

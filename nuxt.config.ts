@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     MONGO_URL:process.env.MONGO_URL    ,  
     HASH_ROUND:process.env.HASH_ROUND    ,  
     SECRET_KEY:process.env.SECRET_KEY    ,  
+    AUTH_ORIGIN:process.env.AUTH_ORIGIN,
   },
   plugins:[
   ],

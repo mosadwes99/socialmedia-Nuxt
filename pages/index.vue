@@ -13,7 +13,7 @@ let isOptionOpen = ref(false);
 async function getData() {
   try {
     data.value = "";
-    let { data: res } = await useFetch(`http://localhost:3000/post`, {
+    let { data: res } = await useFetch(`/post`, {
       transform: (_res) => _res,
       method: "GET",
       headers: { token: token },
@@ -39,7 +39,7 @@ function getId(e) {
 
 async function acceptRequest(e) {
   try {
-    let { data: res } = await useFetch(`http://localhost:3000/user/add/${e}`, {
+    let { data: res } = await useFetch(`/user/add/${e}`, {
       method: "PUT",
       headers: { token },
       transform: (_res) => _res,

@@ -35,7 +35,7 @@ function closeForm() {
 async function SubmitForm() {
   isLoading.value = true;
   try {
-    let { data: res } = await useFetch(`http://localhost:3000/user/abstract`, {
+    let { data: res } = await useFetch(`/user/abstract`, {
       transform: (_res) => _res,
       method: "PUT",
       headers: { token: token },

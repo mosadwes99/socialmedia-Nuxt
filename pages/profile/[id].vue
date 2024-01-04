@@ -10,14 +10,11 @@ let isOptionOpen = ref(false);
 async function getData() {
   try {
     data.value = "";
-    let { data: res } = await useFetch(
-      `http://localhost:3000/user/${route.params.id}`,
-      {
-        transform: (_res) => _res,
-        method: "POST",
-        headers: { token: token },
-      }
-    );
+    let { data: res } = await useFetch(`/user/${route.params.id}`, {
+      transform: (_res) => _res,
+      method: "POST",
+      headers: { token: token },
+    });
 
     setTimeout(() => {
       data.value = res.value.data;
@@ -65,7 +62,9 @@ function getId(e) {
         />
 
         <div v-else class="w-fill bg-slate-100 rounded-lg">
-          <p class="p-4 text-center text-xl text-black/50">There Are No Posts ,Yet.</p>
+          <p class="p-4 text-center text-xl text-black/50">
+            There Are No Posts ,Yet.
+          </p>
         </div>
       </div>
 

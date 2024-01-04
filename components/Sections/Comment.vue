@@ -12,7 +12,7 @@ let token = useCookie("user").value;
 async function deleteComment() {
   try {
     let { data: res } = await useFetch(
-      `http://localhost:3000/post/comment/${data._id}`,
+      `/post/comment/${data._id}`,
       {
         transform: (_res) => _res,
         method: "DELETE",

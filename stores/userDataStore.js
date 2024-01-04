@@ -6,7 +6,7 @@ export let useDataStore = defineStore("user", () => {
 
   async function getUserData() {
     try {
-      let { data: res } = await useFetch(`http://localhost:3000/user/none`, {
+      let { data: res } = await useFetch(`/user/none`, {
         transform: (_res) => _res,
         method: "POST",
         headers: {

@@ -20,7 +20,7 @@ async function getData() {
   if (query.value) {
     try {
       let { data: res } = await useFetch(
-        "http://localhost:3000/user/finduser",
+        `$/user/finduser`,
         {
           transform: (_res) => _res,
           method: "POST",
